@@ -1,28 +1,59 @@
 <template>
-  <div class="rules-container">
-    <h1 class="title">TPL Playing Rules</h1>
+  <div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="@/assets/logo.jpeg" alt="TPL Logo" class="nav-logo" />
+      </div>
+      <ul class="nav-links">
+        <li><button class="nav-button">Home</button></li>
+        <li><button class="nav-button">Rules</button></li>
+        <li><button class="nav-button">Teams</button></li>
+        <li><button class="nav-button">Schedule</button></li>
+      </ul>
+    </nav>
 
-    <div
-      class="category"
-      v-for="(rules, category) in categorizedRules"
-      :key="category"
-    >
-      <button class="category-title" @click="toggleCategory(category)">
-        {{ category }}
+    <!-- Rules Container -->
+    <div class="rules-container">
+      <h1 class="title">TPL Playing Rules</h1>
+
+      <div
+        class="category"
+        v-for="(rules, category) in categorizedRules"
+        :key="category"
+      >
+        <button class="category-title" @click="toggleCategory(category)">
+          {{ category }}
+        </button>
+        <div class="rules" v-show="activeCategories.includes(category)">
+          <ul>
+            <li v-for="rule in rules" :key="rule">{{ rule }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="generate-container">
+      <button @click="generateMatchConditions" class="generate-button">
+        Generate Match Conditions
       </button>
-      <div class="rules" v-show="activeCategories.includes(category)">
-        <ul>
-          <li v-for="rule in rules" :key="rule">{{ rule }}</li>
-        </ul>
+      <div v-if="generatedConditions">
+        <p>Stadium: {{ generatedConditions.stadium }}</p>
+        <p>Type: {{ generatedConditions.type }}</p>
+        <p>Hardness: {{ generatedConditions.hardness }}</p>
+        <p>Cracks: {{ generatedConditions.cracks }}</p>
+        <p>Day: {{ generatedConditions.day }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Logo from '@/assets/logo.jpeg';
+
 export default {
   data() {
     return {
+      Logo,
       activeCategories: [],
       categorizedRules: {
         'Team Composition and Match Settings': [
@@ -55,6 +86,25 @@ export default {
           'Refrain from using actions of S. Afridi, Bumrah, Malinga, Harbhajan if playing with Cards only.',
         ],
       },
+      generatedConditions: null,
+      matchConditions: [
+        // Extracted from the image you provided
+        stadium {
+          'TRENT BRIDGE',
+          'GRASSY/DUSTY',
+          'SOFT',
+          'LIGHT',
+          'DAY 1',
+        },
+        {
+          stadium: 'THE WACA',
+          type: 'GRASSY',
+          hardness: 'SOFT',
+          cracks: 'NONE',
+          day: 'DAY 2',
+        },
+        // ... add the rest of the data in the same format ...
+      ],
     };
   },
   methods: {
@@ -66,23 +116,76 @@ export default {
         this.activeCategories.push(category);
       }
     },
+    generateMatchConditions() {
+      const randomIndex = Math.floor(
+        Math.random() * this.matchConditions.length
+      );
+      this.generatedConditions = this.matchConditions[randomIndex];
+    },
   },
 };
 </script>
 
 <style scoped>
+/* Navigation Bar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000; /* Deep Black */
+  padding: 10px 20px;
+}
+.nav-logo {
+  height: 50px; /* Adjust as needed */
+  width: auto;
+  /* Additional styling as needed */
+}
+
+.logo-placeholder {
+  color: #ffd700; /* Vibrant Yellow */
+  font-family: 'Montserrat Black', sans-serif;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-button {
+  background-color: #ffd700; /* Vibrant Yellow */
+  color: #000000; /* Deep Black */
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #e6c300; /* Darker Yellow */
+}
+
+/* Rules Container Styles */
 .rules-container {
   max-width: 800px;
   margin: auto;
   padding: 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #ffffff; /* White */
 }
 
 .title {
   text-align: center;
-  color: #2c3e50;
+  color: #000000; /* Deep Black */
   margin-bottom: 20px;
   font-size: 28px;
+  font-family: 'Montserrat Black', sans-serif;
 }
 
 .category {
@@ -90,8 +193,8 @@ export default {
 }
 
 .category-title {
-  background-color: #34495e;
-  color: white;
+  background-color: #ffd700; /* Vibrant Yellow */
+  color: #000000; /* Deep Black */
   padding: 10px 15px;
   border: none;
   text-align: left;
@@ -102,11 +205,11 @@ export default {
 }
 
 .category-title:hover {
-  background-color: #2c3e50;
+  background-color: #e6c300; /* Darker Yellow */
 }
 
 .rules {
-  background-color: #ecf0f1;
+  background-color: #f8f9fa; /* Light Grey */
   border: 1px solid #bdc3c7;
   padding: 10px;
   border-radius: 5px;
@@ -152,9 +255,23 @@ export default {
   line-height: 1.5;
 }
 
-.rule-subheading {
-  font-weight: bold;
-  margin-right: 5px;
-  color: #2c3e50;
+.generate-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.generate-button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.generate-button:hover {
+  background-color: #2980b9;
 }
 </style>
