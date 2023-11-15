@@ -89,12 +89,12 @@ export default {
       generatedConditions: null,
       matchConditions: [
         // Extracted from the image you provided
-        stadium {
-          'TRENT BRIDGE',
-          'GRASSY/DUSTY',
-          'SOFT',
-          'LIGHT',
-          'DAY 1',
+        {
+          stadium: 'THE WACA',
+          type: 'GRASSY',
+          hardness: 'SOFT',
+          cracks: 'NONE',
+          day: 'DAY 2',
         },
         {
           stadium: 'THE WACA',
