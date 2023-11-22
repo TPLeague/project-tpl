@@ -1,20 +1,17 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-container>
-        <PlayRules />
-      </v-container>
-    </v-main>
-  </v-app>
+  <div id="app">
+    <MainNavbar />
+    <router-view />
+  </div>
 </template>
 
 <script>
-import PlayRules from './components/PlayRules.vue';
+import MainNavbar from './components/MainNavbar.vue';
 
 export default {
   name: 'App',
   components: {
-    PlayRules,
+    MainNavbar,
   },
 };
 </script>
