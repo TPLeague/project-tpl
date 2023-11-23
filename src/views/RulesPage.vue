@@ -1,6 +1,5 @@
 <template>
   <div>
-    <MainNavbar />
     <div class="rules-container">
       <h1 class="title">Playing Rules</h1>
       <div
