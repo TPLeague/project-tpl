@@ -1,33 +1,31 @@
 <template>
-  <v-container>
+  <div>
+    <MainNavbar />
     <div class="rules-container">
       <h1 class="title">Playing Rules</h1>
-      <v-list dense>
-        <v-list-group
-          v-for="(rules, category) in categorizedRules"
-          :key="category"
-          :model-value="activeCategories[category]"
-          @update:model-value="(value) => (activeCategories[category] = value)"
-        >
-          <template v-slot:activator>
-            <v-list-item link>
-              {{ category }}
-            </v-list-item>
-          </template>
-          <p v-for="(rule, index) in rules" :key="index">
-            {{ rule }}
-          </p>
-        </v-list-group>
-      </v-list>
+      <div
+        class="category"
+        v-for="(rules, category) in categorizedRules"
+        :key="category"
+      >
+        <button class="category-title" @click="toggleCategory(category)">
+          {{ category }}
+        </button>
+        <div class="rules" v-show="activeCategories.includes(category)">
+          <ul>
+            <li v-for="rule in rules" :key="rule">{{ rule }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      activeCategories: {},
+      activeCategories: [],
       categorizedRules: {
         'Team Composition and Match Settings': [
           'Team Name: TPL (Mixed Cards)',
@@ -61,106 +59,46 @@ export default {
       },
     };
   },
-  created() {
-    // Initialize activeCategories with the same keys as categorizedRules
-    for (let category in this.categorizedRules) {
-      this.activeCategories[category] = false;
-    }
+  methods: {
+    toggleCategory(category) {
+      const index = this.activeCategories.indexOf(category);
+      if (index !== -1) {
+        this.activeCategories.splice(index, 1);
+      } else {
+        this.activeCategories.push(category);
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.title {
+  margin-bottom: 20px;
+  color: #0047ab; /* Electric Blue */
+  font-size: 2em;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .rules-container {
   max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff; /* White background for the container */
-  border-radius: 4px; /* Slight rounding of corners for a modern look */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: auto;
+  background-color: #ffffff; /* Galactic White */
 }
 
-.title {
-  font-size: 2rem; /* Large, readable title size */
-  color: #2952c3; /* Primary color from the theme for the title */
-  text-align: center;
-  margin-bottom: 1.5rem; /* Spacing below the title */
-  font-family: 'Roboto', sans-serif; /* Roboto is often used with Material Design */
+.v-expansion-panel-header {
+  background-color: #0047ab; /* Electric Blue */
+  color: #ffffff; /* Galactic White */
 }
 
-.category {
-  margin-bottom: 1rem; /* Spacing between categories */
+.v-expansion-panel-content {
+  background-color: #ffffff; /* Galactic White */
+  color: #000000; /* Space Black */
 }
 
-.v-list-item {
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.v-list-item:hover,
-.v-list-item:active {
-  background-color: #f56a00; /* Secondary color for hover/active state */
-  color: #fff; /* White text when active/hover */
-}
-
-.v-list-group {
-  border: 1px solid #e0e0e0; /* Light border for the collapsible group */
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.v-list-item--group {
-  background-color: #f5f5f5; /* Light background for each item in group */
-}
-
-.div {
-  text-align: left;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #333; /* Darker text for readability */
-}
-
-/* Customizing the look of the button used for categories */
-.category-title {
-  background-color: #ffd700; /* Accent color from the theme */
-  color: #041836; /* Dark color for text */
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.1rem;
-  text-transform: uppercase; /* Uppercase text for a modern feel */
-  padding: 0.75rem 1rem; /* Comfortable padding */
-  border: none;
-  border-radius: 4px; /* Rounded borders */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  display: block; /* Make the buttons fill their container */
-  width: 100%; /* Ensure full width */
-  text-align: left; /* Align text to the left */
-}
-
-.category-title:hover {
-  background-color: #e6c300; /* Slightly darker yellow on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
-}
-
-.rules li::before {
-  content: '• '; /* Bullet point before each rule */
-  color: #3498db; /* Blue color for bullet points */
-  font-weight: bold; /* Bold bullet points */
-  margin-right: 0.5rem; /* Space after bullet point */
-}
-
-/* Adjustments for mobile view */
-@media (max-width: 600px) {
-  .rules-container {
-    margin: 10px;
-    padding: 10px;
-  }
-
-  .title {
-    font-size: 1.5rem; /* Smaller font size for mobile */
-  }
+.v-chip {
+  margin-bottom: 10px;
+  background-color: #7d3c98; /* Neon Purple */
+  color: #ffffff; /* Galactic White */
 }
 </style>
