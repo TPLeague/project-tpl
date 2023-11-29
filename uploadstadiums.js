@@ -10,7 +10,7 @@ const db = admin.firestore();
 
 async function uploadData() {
   const batch = db.batch();
-  data.forEach((item, index) => {
+  data.forEach((item) => {
     const docRef = db.collection('stadiums').doc(); // Automatically generates a unique doc ID
     batch.set(docRef, item);
   });
