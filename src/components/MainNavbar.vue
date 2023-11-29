@@ -11,10 +11,10 @@
     <router-link to="/rules" exact>
       <v-btn text class="nav-link">Rules</v-btn>
     </router-link>
-    <!-- <router-link to="/teams" exact>
-      <v-btn text class="nav-link">Teams</v-btn>
+    <router-link to="/teams" exact>
+      <v-btn text to="/pitch-randomizer">Pitch Randomizer</v-btn>
     </router-link>
-    <router-link to="/tournaments" exact>
+    <!-- <router-link to="/tournaments" exact>
       <v-btn text class="nav-link">Tournaments</v-btn>
     </router-link> -->
   </v-app-bar>

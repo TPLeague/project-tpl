@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from './views/HomePage.vue';
 import RulesPage from './views/RulesPage.vue';
+import PitchRandomizer from './views/PitchRandomizer.vue';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/rules',
     name: 'rules',
     component: RulesPage,
+  },
+  {
+    path: '/pitch-randomizer',
+    name: 'pitchRandomizer',
+    component: PitchRandomizer,
   },
   // ... any other routes
 ];

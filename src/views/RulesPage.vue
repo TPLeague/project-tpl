@@ -1,30 +1,37 @@
 <template>
-  <div>
-    <div class="rules-container">
-      <h1 class="title">Playing Rules</h1>
-      <div
-        class="category"
-        v-for="(rules, category) in categorizedRules"
-        :key="category"
-      >
-        <button class="category-title" @click="toggleCategory(category)">
-          {{ category }}
-        </button>
-        <div class="rules" v-show="activeCategories.includes(category)">
-          <ul>
-            <li v-for="rule in rules" :key="rule">{{ rule }}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12" md="8" offset-md="2">
+        <v-card class="my-4" elevation="2">
+          <v-toolbar color="primary" dark>
+            <v-toolbar-title>Playing Rules</v-toolbar-title>
+          </v-toolbar>
+          <v-expansion-panels accordion>
+            <v-expansion-panel
+              v-for="(rules, category) in categorizedRules"
+              :key="category"
+            >
+              <v-expansion-panel-title>{{ category }}</v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-list dense>
+                  <v-list-item v-for="rule in rules" :key="rule">
+                    <v-list-item-title>{{ rule }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
+  name: 'RulesPage',
   data() {
     return {
-      activeCategories: [],
       categorizedRules: {
         'Team Composition and Match Settings': [
           'Team Name: TPL (Mixed Cards)',
@@ -58,20 +65,24 @@ export default {
       },
     };
   },
-  methods: {
-    toggleCategory(category) {
-      const index = this.activeCategories.indexOf(category);
-      if (index !== -1) {
-        this.activeCategories.splice(index, 1);
-      } else {
-        this.activeCategories.push(category);
-      }
-    },
-  },
 };
 </script>
 
 <style scoped>
+.v-toolbar {
+  border-radius: 4px 4px 0 0;
+}
+
+.v-expansion-panel-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.v-expansion-panel-content {
+  font-size: 0.95rem;
+  background-color: var(--light-background);
+}
+
 .title {
   margin-bottom: 20px;
   color: #0047ab; /* Electric Blue */
@@ -99,5 +110,16 @@ export default {
   margin-bottom: 10px;
   background-color: #7d3c98; /* Neon Purple */
   color: #ffffff; /* Galactic White */
+}
+
+/* Custom colors to match the theme */
+.primary {
+  background-color: var(--electric-blue);
+}
+
+/* Global style overrides */
+:root {
+  --electric-blue: #0047ab;
+  --light-background: #f5f5f5;
 }
 </style>
