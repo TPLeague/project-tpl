@@ -1,12 +1,11 @@
 import { createApp } from 'vue';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // Ensure you are using css-loader
 import App from './App.vue';
+import router from './router';
+import vuetify from './plugins/vuetify'; // Make sure this import path is correct
 
 const app = createApp(App);
 
-const vuetify = createVuetify(); // Replaces new Vuetify()
-
-app.use(vuetify);
+app.use(router);
+app.use(vuetify); // Use the vuetify instance imported from the plugins
 
 app.mount('#app');
