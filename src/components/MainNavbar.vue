@@ -1,22 +1,16 @@
 <template>
-  <v-app-bar app color="primary" dense>
-    <v-toolbar-title>
-      <v-img :src="logoSrc" alt="Platform Logo" height="40" contain></v-img>
+  <v-app-bar app color="green darken-3" dense flat>
+    <v-toolbar-title class="mr-10">
+      <v-img :src="logoSrc" alt="Platform Logo" height="40px"></v-img>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <!-- Use router-link with the exact prop to highlight active link -->
-    <router-link to="/" exact>
-      <v-btn text class="nav-link">Home</v-btn>
-    </router-link>
-    <router-link to="/rules" exact>
-      <v-btn text class="nav-link">Rules</v-btn>
-    </router-link>
-    <router-link to="/teams" exact>
-      <v-btn text to="/pitch-randomizer">Pitch Randomizer</v-btn>
-    </router-link>
-    <!-- <router-link to="/tournaments" exact>
-      <v-btn text class="nav-link">Tournaments</v-btn>
-    </router-link> -->
+    <v-btn text :to="{ path: '/' }" class="nav-item">Home</v-btn>
+    <v-btn text :to="{ path: '/rules' }" class="nav-item">Rules</v-btn>
+    <v-btn text :to="{ path: '/pitch-randomizer' }" class="nav-item"
+      >Pitch Randomizer</v-btn
+    >
+    <!-- Placeholder for Teams button, disabled until the route is implemented -->
+    <v-btn text disabled class="nav-item">Teams (Coming Soon)</v-btn>
   </v-app-bar>
 </template>
 
@@ -30,47 +24,39 @@ export default {
   },
   computed: {
     currentRoute() {
-      return this.$route.name; // This will keep track of the current active route.
+      return this.$route.name;
     },
   },
 };
 </script>
 
 <style scoped>
-/* Styles for the navigation links */
-.nav-link {
+.nav-item {
   text-transform: uppercase;
   font-weight: bold;
-  margin-right: 16px;
+  margin-right: 20px;
+  color: white;
   letter-spacing: 0.05em;
-  transition: color 0.3s ease; /* Transition for a smooth color change */
 }
 
-/* Style adjustments for active navigation link */
-.nav-link.active {
-  color: var(--v-accent-base); /* Accent color for the active link */
-}
-
-/* Adjust the logo image */
-.v-img {
-  max-height: 40px; /* Limit the logo size */
-}
-
-/* Ensure the app bar extends full width and remove default shadow for a flat design */
 .v-app-bar {
-  width: 100%;
-  box-shadow: none;
+  background-color: #004d40; /* Dark green color for the navbar to match cricket theme */
+  height: 60px; /* Increased height for better visibility */
 }
 
-/* Responsive design for smaller screens */
+.v-toolbar-title {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 600px) {
-  .nav-link {
-    margin-right: 8px; /* Less margin on smaller screens */
-    font-size: 0.875rem; /* Smaller font size for nav links */
+  .nav-item {
+    margin-right: 8px;
+    font-size: 0.875rem;
   }
 
   .v-toolbar-title {
-    min-width: 0; /* Allow the title area to shrink on smaller screens */
+    min-width: 0;
   }
 }
 </style>

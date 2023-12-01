@@ -16,7 +16,7 @@ const routes = [
   },
   {
     path: '/pitch-randomizer',
-    name: 'pitchRandomizer',
+    name: 'pitch-randomizer',
     component: PitchRandomizer,
   },
   // ... any other routes
