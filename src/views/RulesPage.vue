@@ -1,36 +1,37 @@
 <template>
-  <div>
-    <MainNavbar />
-    <div class="rules-container">
-      <h1 class="title">Playing Rules</h1>
-      <div
-        class="category"
-        v-for="(rules, category) in categorizedRules"
-        :key="category"
-      >
-        <button class="category-title" @click="toggleCategory(category)">
-          {{ category }}
-        </button>
-        <div class="rules" v-show="activeCategories.includes(category)">
-          <ul>
-            <li v-for="rule in rules" :key="rule">{{ rule }}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12" md="8" offset-md="2">
+        <v-card class="my-4" elevation="2">
+          <v-toolbar color="primary" dark>
+            <v-toolbar-title>Playing Rules</v-toolbar-title>
+          </v-toolbar>
+          <v-expansion-panels accordion>
+            <v-expansion-panel
+              v-for="(rules, category) in categorizedRules"
+              :key="category"
+            >
+              <v-expansion-panel-title>{{ category }}</v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-list dense>
+                  <v-list-item v-for="rule in rules" :key="rule">
+                    <v-list-item-title>{{ rule }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import MainNavbar from '@/components/MainNavbar.vue';
-
 export default {
-  components: {
-    MainNavbar,
-  },
+  name: 'RulesPage',
   data() {
     return {
-      activeCategories: [],
       categorizedRules: {
         'Team Composition and Match Settings': [
           'Team Name: TPL (Mixed Cards)',
@@ -64,79 +65,61 @@ export default {
       },
     };
   },
-  methods: {
-    toggleCategory(category) {
-      const index = this.activeCategories.indexOf(category);
-      if (index !== -1) {
-        this.activeCategories.splice(index, 1);
-      } else {
-        this.activeCategories.push(category);
-      }
-    },
-  },
 };
 </script>
 
 <style scoped>
+.v-toolbar {
+  border-radius: 4px 4px 0 0;
+}
+
+.v-expansion-panel-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.v-expansion-panel-content {
+  font-size: 0.95rem;
+  background-color: var(--light-background);
+}
+
+.title {
+  margin-bottom: 20px;
+  color: #0047ab; /* Electric Blue */
+  font-size: 2em;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .rules-container {
   max-width: 800px;
   margin: auto;
-  padding: 20px;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #ffffff;
+  background-color: #ffffff; /* Galactic White */
 }
-.title {
-  text-align: center;
-  color: #000000;
-  margin-bottom: 20px;
-  font-size: 28px;
-  font-family: 'Montserrat Black', sans-serif;
+
+.v-expansion-panel-header {
+  background-color: #0047ab; /* Electric Blue */
+  color: #ffffff; /* Galactic White */
 }
-.category {
-  margin-bottom: 15px;
+
+.v-expansion-panel-content {
+  background-color: #ffffff; /* Galactic White */
+  color: #000000; /* Space Black */
 }
-.category-title {
-  background-color: #ffd700;
-  color: #000000;
-  padding: 10px 15px;
-  border: none;
-  text-align: left;
-  width: 100%;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.category-title:hover {
-  background-color: #e6c300;
-}
-.rules {
-  background-color: #f8f9fa;
-  border: 1px solid #bdc3c7;
-  padding: 10px;
-  border-radius: 5px;
-}
-.rules ul {
-  list-style-type: none;
-  padding: 0;
-}
-.rules li {
-  background-color: #fff;
+
+.v-chip {
   margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: #7d3c98; /* Neon Purple */
+  color: #ffffff; /* Galactic White */
 }
-.rules li:hover {
-  background-color: #f8f9fa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+/* Custom colors to match the theme */
+.primary {
+  background-color: var(--electric-blue);
 }
-.rules li::before {
-  content: '•';
-  color: #3498db;
-  font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+
+/* Global style overrides */
+:root {
+  --electric-blue: #0047ab;
+  --light-background: #f5f5f5;
 }
 </style>
