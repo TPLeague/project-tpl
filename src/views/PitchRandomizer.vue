@@ -1,201 +1,220 @@
 <template>
-  <v-container class="pitch-randomizer">
-    <v-row justify="center">
-      <v-col cols="12">
-        <v-card>
-          <v-card-title class="title">Generate Pitch Conditions</v-card-title>
-          <v-card-text v-if="generatedPitch">
-            <div><strong>Stadium:</strong> {{ generatedPitch.stadium }}</div>
+  <div class="min-h-screen bg-space-black p-8 text-galactic-white">
+    <div class="container mx-auto space-y-6">
+      <div
+        class="bg-gradient-to-r from-neon-purple via-electric-blue to-neon-purple p-6 rounded-xl shadow-lg"
+      >
+        <h2 class="text-3xl font-bold mb-4">Generate Pitch Conditions</h2>
+        <div
+          v-if="generatedPitch"
+          class="p-4 bg-space-black bg-opacity-80 rounded-xl"
+        >
+          <div class="grid grid-cols-1 gap-4">
             <div>
-              <strong>Pitch Type:</strong> {{ generatedPitch.pitchType }}
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >Stadium:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.stadium }}</span
+              >
             </div>
-            <div><strong>Cracks:</strong> {{ generatedPitch.cracks }}</div>
-            <div><strong>Hardness:</strong> {{ generatedPitch.hardness }}</div>
-            <div><strong>Pitch Day:</strong> {{ generatedPitch.pitchDay }}</div>
-            <div><strong>Pitch ID:</strong> {{ generatedPitch.id }}</div>
-            <v-btn
-              small
-              color="secondary"
-              @click="copyToClipboard(generatedPitch)"
-              >Copy Current Pitch</v-btn
-            >
-          </v-card-text>
-          <v-card-actions class="justify-center">
-            <v-btn class="generate-btn" color="primary" @click="generatePitch"
-              >Generate New Pitch</v-btn
-            >
-          </v-card-actions>
-        </v-card>
-        <v-alert type="error" v-if="error">{{ error }}</v-alert>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <v-card-title class="title">Pitch Log</v-card-title>
-          <v-card-text>
-            <v-data-table
-              :headers="headers"
-              :items="logEntries"
-              :items-per-page="5"
-              class="elevation-1"
-              hide-default-footer
-            >
-              <template v-slot:[`item.actions`]="{ item }">
-                <v-btn small color="secondary" @click="copyToClipboard(item)"
-                  >Copy</v-btn
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >Pitch Type:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.pitchType }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >Cracks:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.cracks }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >Hardness:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.hardness }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase"
+                >Pitch Day:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.pitchDay }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >Pitch ID:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.id || 'N/A' }}</span
+              >
+            </div>
+          </div>
+          <button
+            class="mt-4 bg-cosmic-orange text-galactic-white font-bold py-2 px-4 rounded hover:bg-starlight-yellow transition duration-300"
+            @click="copyToClipboard(generatedPitch)"
+          >
+            Copy Current Pitch
+          </button>
+        </div>
+        <button
+          class="mt-4 text-galactic-white font-bold py-2 px-4 rounded bg-electric-blue hover:bg-neon-purple transition duration-300"
+          @click="generatePitch"
+        >
+          Generate New Pitch
+        </button>
+        <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
+      </div>
+      <div
+        class="bg-gradient-to-r from-neon-purple via-electric-blue to-neon-purple p-6 rounded-xl shadow-lg"
+      >
+        <h3 class="text-3xl font-bold text-galactic-white mb-4">Pitch Log</h3>
+        <div
+          class="overflow-x-auto bg-space-black bg-opacity-80 rounded-xl p-4"
+        >
+          <table class="min-w-full divide-y divide-galactic-white">
+            <thead class="bg-space-black">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
                 >
-              </template>
-            </v-data-table>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+                  ID
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Stadium
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Pitch Type
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Cracks
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Hardness
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Pitch Day
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Time/Date
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-space-black divide-y divide-galactic-white">
+              <tr v-for="(entry, index) in logEntries" :key="index">
+                <td class="px-6 py-4 whitespace-nowrap">{{ index + 1 }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ entry.stadium }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ entry.pitchType }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ entry.cracks }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ entry.hardness }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ entry.pitchDay }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ entry.timestamp }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <button
+                    class="bg-cosmic-orange text-white font-bold py-1 px-3 rounded hover:bg-starlight-yellow transition duration-300"
+                    @click="copyToClipboard(entry)"
+                  >
+                    Copy
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import axios from 'axios';
 
-export default {
-  name: 'PitchRandomizer',
-  data() {
-    return {
-      generatedPitch: null,
-      logEntries: [],
-      error: '',
-      headers: [
-        { text: 'ID', align: 'start', sortable: false, value: 'id' },
-        { text: 'Stadium', value: 'stadium' },
-        { text: 'Pitch Type', value: 'pitchType' },
-        { text: 'Cracks', value: 'cracks' },
-        { text: 'Hardness', value: 'hardness' },
-        { text: 'Pitch Day', value: 'pitchDay' },
-        { text: 'Timestamp', value: 'timestamp' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
+const pitchId = ref(0);
+const generatedPitch = ref(null);
+const logEntries = ref([]);
+const error = ref('');
+
+const generatePitch = async () => {
+  try {
+    error.value = '';
+    const response = await axios.get('http://...');
+    const pitchData = {
+      ...response.data,
+      timestamp: new Date().toLocaleString(),
     };
-  },
-  methods: {
-    async generatePitch() {
-      try {
-        this.error = '';
-        const response = await axios.get(
-          'http://localhost:3000/api/pitch-randomizer'
-        );
-        const pitchData = {
-          ...response.data,
-          timestamp: new Date().toLocaleString(),
-        };
-        this.generatedPitch = pitchData;
-        this.logEntries.unshift(pitchData);
-      } catch (err) {
-        this.error = `Failed to load pitch data: ${
-          err.message || 'Server error'
-        }`;
-      }
-    },
-    copyToClipboard(pitch) {
-      if (!pitch) {
-        this.error = 'No pitch data available to copy.';
-        return;
-      }
-      const pitchText = `Stadium: ${pitch.stadium}\nPitch Type: ${pitch.pitchType}\nCracks: ${pitch.cracks}\nHardness: ${pitch.hardness}\nPitch Day: ${pitch.pitchDay}\nTimestamp: ${pitch.timestamp}`;
-      navigator.clipboard
-        .writeText(pitchText)
-        .then(() => {
-          // Handle successful copy
-        })
-        .catch((err) => {
-          this.error = 'Failed to copy pitch conditions: ' + err.message;
-        });
-    },
-  },
+    generatedPitch.value = pitchData;
+    logEntries.value.unshift(pitchData);
+    pitchId.value++;
+  } catch (err) {
+    error.value = `Failed to load pitch data: ${err.message || 'Server error'}`;
+  }
+};
+
+const copyToClipboard = (pitch) => {
+  if (!pitch) {
+    error.value = 'No pitch data available to copy.';
+    return;
+  }
+  const pitchText = `ID: ${pitch.id}\nStadium: ${pitch.stadium}\nPitch Type: ${pitch.pitchType}\nCracks: ${pitch.cracks}\nHardness: ${pitch.hardness}\nPitch Day: ${pitch.pitchDay}\nTimestamp: ${pitch.timestamp}`;
+  navigator.clipboard.writeText(pitchText).catch((err) => {
+    error.value = 'Failed to copy pitch conditions: ' + err.message;
+  });
 };
 </script>
 
-<style scoped>
-.pitch-randomizer {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-/* Card styling */
-.pitch-randomizer .v-card {
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Title styling */
-.pitch-randomizer .title {
-  color: #2952c3;
-  font-weight: bold;
-}
-
-/* Button styling */
-.pitch-randomizer .v-btn {
-  color: white;
-  margin-top: 10px;
-}
-
-/* Generate button specific styling */
-.pitch-randomizer .generate-btn {
-  background-color: #4caf50;
-}
-
-/* Copy button styling */
-.pitch-randomizer .v-btn.secondary {
-  background-color: #ffc107;
-}
-
-/* Table styling */
-.pitch-randomizer .v-data-table {
-  background-color: #f5f5f5;
-  border-radius: 8px;
-}
-
-.pitch-randomizer .v-data-table th {
-  color: #2952c3;
-  font-weight: bold;
-}
-
-.pitch-randomizer .v-data-table .v-icon {
-  color: #ffd700;
-}
-
-/* Alert styling */
-.pitch-randomizer .v-alert {
-  margin-top: 20px;
-}
-
-/* Centered actions */
-.pitch-randomizer .v-card-actions {
-  justify-content: center;
-}
-
-@media (max-width: 600px) {
-  .pitch-randomizer .v-card {
-    margin-top: 10px;
-  }
-}
-
-/* Table header styling */
-.pitch-randomizer .v-data-table-header {
-  background-color: #e9e9e9; /* Light grey background for headers */
-  color: #333; /* Dark text for readability */
-  font-weight: bold;
-}
-
-/* Centered button styling */
-.pitch-randomizer .v-btn {
-  margin: auto;
-  display: block;
-}
-
-/* Table cell styling */
-.pitch-randomizer .v-data-table .cell {
-  text-align: center; /* Center align text in cells */
-}
-</style>
+<style scoped></style>
