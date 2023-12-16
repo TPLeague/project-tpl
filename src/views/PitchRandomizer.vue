@@ -180,40 +180,50 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script>
 import axios from 'axios';
 
-const pitchId = ref(0);
-const generatedPitch = ref(null);
-const logEntries = ref([]);
-const error = ref('');
-
-const generatePitch = async () => {
-  try {
-    error.value = '';
-    const response = await axios.get('http://...');
-    const pitchData = {
-      ...response.data,
-      timestamp: new Date().toLocaleString(),
+export default {
+  name: 'PitchRandomizer',
+  data() {
+    return {
+      pitchId: 0,
+      generatedPitch: null,
+      logEntries: [],
+      error: '',
     };
-    generatedPitch.value = pitchData;
-    logEntries.value.unshift(pitchData);
-    pitchId.value++;
-  } catch (err) {
-    error.value = `Failed to load pitch data: ${err.message || 'Server error'}`;
-  }
-};
-
-const copyToClipboard = (pitch) => {
-  if (!pitch) {
-    error.value = 'No pitch data available to copy.';
-    return;
-  }
-  const pitchText = `ID: ${pitch.id}\nStadium: ${pitch.stadium}\nPitch Type: ${pitch.pitchType}\nCracks: ${pitch.cracks}\nHardness: ${pitch.hardness}\nPitch Day: ${pitch.pitchDay}\nTimestamp: ${pitch.timestamp}`;
-  navigator.clipboard.writeText(pitchText).catch((err) => {
-    error.value = 'Failed to copy pitch conditions: ' + err.message;
-  });
+  },
+  methods: {
+    async generatePitch() {
+      try {
+        this.error = '';
+        const response = await axios.get(
+          'http://localhost:3000/api/pitch-randomizer'
+        );
+        const pitchData = {
+          ...response.data,
+          timestamp: new Date().toLocaleString(),
+        };
+        this.generatedPitch = pitchData;
+        this.logEntries.unshift(pitchData);
+        this.pitchId++;
+      } catch (err) {
+        this.error = `Failed to load pitch data: ${
+          err.message || 'Server error'
+        }`;
+      }
+    },
+    copyToClipboard(pitch) {
+      if (!pitch) {
+        this.error = 'No pitch data available to copy.';
+        return;
+      }
+      const pitchText = `ID: ${pitch.id}\nStadium: ${pitch.stadium}\nPitch Type: ${pitch.pitchType}\nCracks: ${pitch.cracks}\nHardness: ${pitch.hardness}\nPitch Day: ${pitch.pitchDay}\nTimestamp: ${pitch.timestamp}`;
+      navigator.clipboard.writeText(pitchText).catch((err) => {
+        this.error = 'Failed to copy pitch conditions: ' + err.message;
+      });
+    },
+  },
 };
 </script>
 
