@@ -1,9 +1,12 @@
+# System files
 .DS_Store
+
+# Dependency directories
 node_modules
 /dist
 
-
-# local env files
+# Local environment variable files
+.env
 .env.local
 .env.*.local
 
@@ -21,3 +24,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Firebase credentials
+tpl-platform-4079e-firebase-adminsdk-xi77l-2ff4dd728e.json

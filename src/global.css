@@ -1,0 +1,221 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Define custom color variables */
+:root {
+  --electric-blue: #0047ab;
+  --neon-purple: #7d3c98;
+  --cosmic-orange: #ffa500;
+  --galactic-white: #ffffff;
+  --space-black: #000000;
+  --starlight-yellow: #ffd700;
+}
+
+@layer base {
+  h1 {
+    @apply text-electric-blue font-bold;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  p {
+    @apply text-space-black;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  a {
+    @apply text-starlight-yellow hover:text-cosmic-orange;
+    transition: color 0.3s;
+  }
+
+  body {
+    @apply bg-galactic-white text-space-black;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* More base styles */
+}
+
+@layer components {
+  /* MainNavbar Styles */
+  .navbar {
+    background-color: var(--electric-blue);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem; /* Adjust size as needed */
+    color: var(--galactic-white);
+    font-weight: bold;
+  }
+
+  .navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-link {
+    display: inline-block;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    color: var(--galactic-white);
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .navbar-link:hover {
+    background-color: var(--neon-purple);
+    color: var(--galactic-white);
+  }
+
+  /* AuctionPage Styles */
+  .auction-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .auction-item {
+    border: 1px solid var(--neon-purple);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* HomePage Styles */
+  .home-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .home-banner {
+    background-color: var(--neon-purple);
+    color: var(--galactic-white);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  /* LoginPage Styles */
+  .login-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .login-form {
+    max-width: 400px;
+    margin: auto;
+  }
+  .login-input {
+    border: 1px solid var(--electric-blue);
+  }
+
+  /* MarketPage Styles */
+  .market-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .market-item {
+    border-bottom: 1px solid var(--neon-purple);
+    padding: 1rem;
+  }
+
+  /* PitchRandomizer Styles */
+  .pitch-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .pitch-details {
+    border: 1px solid var(--cosmic-orange);
+    padding: 1rem;
+  }
+
+  /* RegisterPage Styles */
+  .register-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .register-form {
+    max-width: 400px;
+    margin: auto;
+  }
+  .register-input {
+    border: 1px solid var(--starlight-yellow);
+  }
+
+  /* RulesPage Styles */
+  .rules-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .rule-item {
+    border-bottom: 1px solid var(--neon-purple);
+    padding: 1rem;
+  }
+
+  /* TournamentsPage Styles */
+  .tournaments-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .tournament-item {
+    border: 1px solid var(--electric-blue);
+    padding: 1rem;
+  }
+
+  /* ToursPage Styles */
+  .tours-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .tour-item {
+    border: 1px solid var(--cosmic-orange);
+    padding: 1rem;
+  }
+
+  /* TransfersPage Styles */
+  .transfers-container {
+    background-color: var(--galactic-white);
+    color: var(--space-black);
+  }
+  .transfer-item {
+    border: 1px solid var(--starlight-yellow);
+    padding: 1rem;
+  }
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-to-r {
+  background-image: linear-gradient(
+    to right,
+    var(--electric-blue),
+    var(--neon-purple)
+  );
+}
+
+.hover\:bg-gradient-to-r:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--neon-purple),
+    var(--electric-blue)
+  );
+}
+
+/* Text Colors */
+.text-white {
+  color: var(--galactic-white);
+}
+
+/* Utility Classes */
+@layer utilities {
+  .bg-primary {
+    background-color: var(--electric-blue);
+  }
+
+  .bg-secondary {
+    background-color: var(--neon-purple);
+  }
+
+  /* More utilities */
+}

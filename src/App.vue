@@ -1,21 +1,12 @@
 <template>
-  <v-app>
-    <div id="app">
-      <MainNavbar />
-      <router-view />
-    </div>
-  </v-app>
+  <div class="min-h-screen bg-spaceBlack">
+    <MainNavbar />
+    <router-view />
+  </div>
 </template>
 
-<script>
+<script setup>
 import MainNavbar from './components/MainNavbar.vue';
-
-export default {
-  name: 'App',
-  components: {
-    MainNavbar,
-  },
-};
 </script>
 
 <style>
@@ -25,6 +16,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 30px;
 }
 </style>
