@@ -1,58 +1,36 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-space-black">
-    <div class="w-full max-w-xs">
-      <form
-        @submit.prevent="login"
-        class="bg-space-black shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      >
-        <div class="mb-4">
-          <label
-            class="block text-galactic-white text-sm font-bold mb-2"
-            for="email"
-          >
-            Email
-          </label>
+  <div class="flex items-center justify-center min-h-screen bg-space-black p-4">
+    <div class="w-full max-w-md form-container">
+      <h1 class="form-title">Login to TPL</h1>
+      <form @submit.prevent="handleLogin" class="space-y-6 mt-4">
+        <div class="input-field">
+          <label for="email" class="input-label">Email</label>
           <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
             type="email"
-            placeholder="Email"
+            id="email"
             v-model="email"
+            class="input-box"
             required
+            autofocus
           />
         </div>
-        <div class="mb-6">
-          <label
-            class="block text-galactic-white text-sm font-bold mb-2"
-            for="password"
-          >
-            Password
-          </label>
+        <div class="input-field">
+          <label for="password" class="input-label">Password</label>
           <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
             type="password"
-            placeholder="******************"
+            id="password"
             v-model="password"
+            class="input-box"
             required
           />
-          <p v-if="error" class="text-red-500 text-xs italic">{{ error }}</p>
         </div>
-        <div class="flex items-center justify-between">
-          <button
-            class="bg-electric-blue hover:bg-neon-purple text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Login
-          </button>
-          <a
-            class="inline-block align-baseline font-bold text-sm text-starlight-yellow hover:text-cosmic-orange"
-            href="#"
-          >
-            Forgot Password?
-          </a>
-        </div>
+        <button type="submit" class="btn-primary w-full">Login</button>
+        <p v-if="error" class="error-message">{{ error }}</p>
       </form>
+      <div class="text-center text-galactic-white mt-4">
+        <a href="#" class="link-hover">Forgot Password?</a><br />
+        New to TPL? <a href="/register" class="link-hover">Sign Up</a>
+      </div>
     </div>
   </div>
 </template>
@@ -65,18 +43,17 @@ import { useRouter } from 'vue-router';
 const email = ref('');
 const password = ref('');
 const error = ref('');
-
 const router = useRouter();
 
-const login = async () => {
+const handleLogin = async () => {
   try {
     await axios.post('/api/login', {
       email: email.value,
       password: password.value,
     });
-    router.push('/');
-  } catch (e) {
-    error.value = e.response?.data?.message || e.message;
+    router.push('/some-success-route');
+  } catch (err) {
+    error.value = err.response?.data?.message || 'Login failed';
   }
 };
 </script>

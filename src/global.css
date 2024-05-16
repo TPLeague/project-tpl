@@ -19,7 +19,7 @@
   }
 
   p {
-    @apply text-space-black;
+    text-color: var(--space-black);
     font-family: 'Roboto', sans-serif;
   }
 
@@ -202,9 +202,32 @@
   );
 }
 
-/* Text Colors */
-.text-white {
-  color: var(--galactic-white);
+.input-label {
+  @apply text-galactic-white font-medium;
+}
+
+.input-box {
+  @apply bg-space-black text-galactic-white border border-neon-purple rounded-md px-4 py-2 outline-none focus:border-electric-blue;
+}
+
+.btn-primary {
+  @apply bg-electric-blue text-galactic-white font-bold py-2 px-4 rounded hover:bg-neon-purple focus:outline-none focus:ring-2 focus:ring-electric-blue focus:ring-opacity-50;
+}
+
+.form-container {
+  @apply bg-galactic-white rounded-lg shadow-xl p-8;
+}
+
+.form-title {
+  @apply text-3xl font-bold text-center text-electric-blue;
+}
+
+.link-hover {
+  @apply text-starlight-yellow hover:text-cosmic-orange;
+}
+
+.error-message {
+  @apply text-red-500 text-center mt-2;
 }
 
 /* Utility Classes */
