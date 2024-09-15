@@ -1,0 +1,267 @@
+[
+  {
+    "name": "Melbourne Cricket Ground",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Sydney Cricket Ground",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Adelaide Oval",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Blundstone Arena",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "Perth Stadium",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Allan Border Field",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Coffs Harbour",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "Docklands Stadium",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "Lord's Cricket Ground",
+    "country": "England",
+    "isLicensed": true
+  },
+  {
+    "name": "Kia Oval",
+    "country": "England",
+    "isLicensed": false
+  },
+  {
+    "name": "Emirates Old Trafford",
+    "country": "England",
+    "isLicensed": false
+  },
+  {
+    "name": "Edgbaston Cricket Ground",
+    "country": "England",
+    "isLicensed": true
+  },
+  {
+    "name": "Trent Bridge",
+    "country": "England",
+    "isLicensed": true
+  },
+  {
+    "name": "Headingley",
+    "country": "England",
+    "isLicensed": true
+  },
+  {
+    "name": "Ageas Bowl",
+    "country": "England",
+    "isLicensed": false
+  },
+  {
+    "name": "Sophia Gardens",
+    "country": "England",
+    "isLicensed": false
+  },
+  {
+    "name": "Kennington Oval",
+    "country": "England",
+    "isLicensed": false
+  },
+  {
+    "name": "Bristol County Ground",
+    "country": "England",
+    "isLicensed": false
+  },
+  {
+    "name": "The Gabba",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Junction Oval",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Karen Rolton Oval",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "Manuka Oval",
+    "country": "Australia",
+    "isLicensed": true
+  },
+  {
+    "name": "North Sydney Oval",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "Sydney Showgrounds",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "The WACA",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "Great Barrier Reef Arena",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "GMHBA Stadium",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "UTAS Stadium",
+    "country": "Australia",
+    "isLicensed": false
+  },
+  {
+    "name": "Delhi Park",
+    "country": "India",
+    "isLicensed": false
+  },
+  {
+    "name": "Kolkata Park",
+    "country": "India",
+    "isLicensed": false
+  },
+  {
+    "name": "Arun Jaitley Stadium",
+    "country": "India",
+    "isLicensed": false
+  },
+  {
+    "name": "Rajiv Gandhi International Stadium",
+    "country": "India",
+    "isLicensed": false
+  },
+  {
+    "name": "Sawai Mansingh Stadium",
+    "country": "India",
+    "isLicensed": false
+  },
+  {
+    "name": "Eden Gardens",
+    "country": "India",
+    "isLicensed": true
+  },
+  {
+    "name": "BRSABV Ekana Stadium",
+    "country": "India",
+    "isLicensed": true
+  },
+  {
+    "name": "Narendra Modi Stadium",
+    "country": "India",
+    "isLicensed": true
+  },
+  {
+    "name": "Inderjit Singh Bindra Stadium",
+    "country": "India",
+    "isLicensed": true
+  },
+  {
+    "name": "Wankhede Stadium",
+    "country": "India",
+    "isLicensed": true
+  },
+  {
+    "name": "Wankhede Stadium",
+    "country": "India",
+    "isLicensed": true
+  },
+  {
+    "name": "Brian Lara Stadium",
+    "country": "West Indies",
+    "isLicensed": true
+  },
+  {
+    "name": "Daren Sammy Cricket Ground",
+    "country": "West Indies",
+    "isLicensed": true
+  },
+  {
+    "name": "Kensington Oval",
+    "country": "West Indies",
+    "isLicensed": true
+  },
+  {
+    "name": "Providence Stadium",
+    "country": "West Indies",
+    "isLicensed": false
+  },
+  {
+    "name": "Queen's Park Oval",
+    "country": "West Indies",
+    "isLicensed": true
+  },
+  {
+    "name": "Sabina Park",
+    "country": "West Indies",
+    "isLicensed": true
+  },
+  {
+    "name": "Auckland Oval",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Capetown Stadium",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Colombo Park Oval",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Dhaka Stadium",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Dubai Cricket Ground",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Durban Fields",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Lahore Cricket Club",
+    "country": "Others",
+    "isLicensed": false
+  },
+  {
+    "name": "Wellington Park",
+    "country": "Others",
+    "isLicensed": false
+  }
+]

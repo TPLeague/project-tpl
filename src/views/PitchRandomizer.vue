@@ -67,7 +67,29 @@
               </span>
               <span
                 class="text-xs font-bold text-galactic-white uppercase tracking-wider"
-                >{{ generatedPitch.id || 'N/A' }}</span
+                >{{ generatedPitch.id || "N/A" }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >Country:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{ generatedPitch.country }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="px-6 py-3 justified-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >License Status:
+              </span>
+              <span
+                class="text-xs font-bold text-galactic-white uppercase tracking-wider"
+                >{{
+                  generatedPitch.isLicensed ? "Licensed" : "Unlicensed"
+                }}</span
               >
             </div>
           </div>
@@ -142,6 +164,18 @@
                   scope="col"
                   class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
                 >
+                  Country
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
+                  License Status
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-center text-s font-bold text-galactic-white uppercase tracking-wider"
+                >
                   Actions
                 </th>
               </tr>
@@ -163,6 +197,10 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ entry.timestamp }}
                 </td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ entry.country }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ entry.isLicensed ? "Licensed" : "Unlicensed" }}
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <button
                     class="bg-cosmic-orange text-white font-bold py-1 px-3 rounded hover:bg-starlight-yellow transition duration-300"
@@ -181,50 +219,58 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios"
 
 export default {
-  name: 'PitchRandomizer',
+  name: "PitchRandomizer",
   data() {
     return {
       pitchId: 0,
       generatedPitch: null,
       logEntries: [],
-      error: '',
-    };
+      error: "",
+    }
   },
   methods: {
     async generatePitch() {
       try {
-        this.error = '';
+        this.error = ""
         const response = await axios.get(
-          'http://localhost:3000/api/pitch-randomizer'
-        );
+          "http://localhost:3000/api/pitch-randomizer"
+        )
         const pitchData = {
           ...response.data,
           timestamp: new Date().toLocaleString(),
-        };
-        this.generatedPitch = pitchData;
-        this.logEntries.unshift(pitchData);
-        this.pitchId++;
+        }
+        this.generatedPitch = pitchData
+        this.logEntries.unshift(pitchData)
+        this.pitchId++
       } catch (err) {
         this.error = `Failed to load pitch data: ${
-          err.message || 'Server error'
-        }`;
+          err.message || "Server error"
+        }`
       }
     },
     copyToClipboard(pitch) {
       if (!pitch) {
-        this.error = 'No pitch data available to copy.';
-        return;
+        this.error = "No pitch data available to copy."
+        return
       }
-      const pitchText = `ID: ${pitch.id}\nStadium: ${pitch.stadium}\nPitch Type: ${pitch.pitchType}\nCracks: ${pitch.cracks}\nHardness: ${pitch.hardness}\nPitch Day: ${pitch.pitchDay}\nTimestamp: ${pitch.timestamp}`;
+      const pitchText = `ID: ${pitch.id}\nStadium: ${pitch.stadium}\nCountry: ${
+        pitch.country
+      }\nLicense Status: ${
+        pitch.isLicensed ? "Licensed" : "Unlicensed"
+      }\nPitch Type: ${pitch.pitchType}\nCracks: ${pitch.cracks}\nHardness: ${
+        pitch.hardness
+      }\nPitch Day: ${pitch.pitchDay}\nTimestamp: ${pitch.timestamp}`
       navigator.clipboard.writeText(pitchText).catch((err) => {
-        this.error = 'Failed to copy pitch conditions: ' + err.message;
-      });
+        this.error = "Failed to copy pitch conditions: " + err.message
+      })
     },
   },
-};
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Add your scoped styles here if needed */
+</style>

@@ -22,6 +22,6 @@
 </script>
 
 <style>
-@import '../global.css';
+@import "../styles/global.css";
 /* Additional custom styles if needed */
 </style>

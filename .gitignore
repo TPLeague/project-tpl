@@ -5,6 +5,9 @@
 node_modules
 /dist
 
+# Docs directories
+/docs
+
 # Local environment variable files
 .env
 .env.local
@@ -25,5 +28,14 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-# Firebase credentials
-tpl-platform-4079e-firebase-adminsdk-xi77l-2ff4dd728e.json
+# Mac OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
